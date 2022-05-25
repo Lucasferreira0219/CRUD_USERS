@@ -1,2 +1,3 @@
-# CRUD_USERS
-REST API CRUD WITH PHP FOR USERS CONTROL (STUDY) :book:
+# Users Control API 
+
+<p>Project for studies in order to manipulate information through an API with PHP</p>
