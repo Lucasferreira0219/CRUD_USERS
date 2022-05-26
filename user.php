@@ -1,7 +1,5 @@
 <?php 
 
-
-
 //Criando uma classe
 class user {
 
@@ -42,35 +40,35 @@ class user {
     }
 
     //conexão com o banco de dados
-    private function connection() : \PDO
+    private function connection() :\PDO
     {
-        return new \PDO("mysql:host=localhost;dbname=db_crud","root", "")
+        return new \PDO("mysql:host=localhost;dbname=db_crud","root", "");
     }
 
     //Função para criar os registros
-    private function create() :array
+    public function create() :array
     {
         //mantem a conexão com o banco
         $con = $this->connection();
         //stmt é para evitar sql injection 
         $stmt = $con->prepare("INSERT INTO user VALUES (NULL,:_name, :_password)");
         //\PDO::PARAM_STR para aceitar só string
-        $stmt->bindValue(":_name" $this->getName(), \PDO::PARAM_STR);
-        $stmt->bindValue(":_password" $this->getPassword(), \PDO::PARAM_STR);
+        $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
+        $stmt->bindValue(":_password", $this->getPassword(), \PDO::PARAM_STR);
         //se a inclusão foi bem sucedida 
         if ($stmt->execute()){
-            $this->setID($con->lastInsertId())
+            $this->setID($con->lastInsertId());
             return $this->read();
         }
         return[];
     }
 
     //funcao para ler o registro
-    private function read() :array
+    public function read() :array
     {
         //mantem a conexão com o banco
         $con = $this->connection();
-        if (this->getId() === 0){
+        if ($this->getId() === 0){
             //stmt é para evitar sql injection 
             $stmt = $con->prepare("SELECT * FROM user");
             //se a leitura foi bem sucedida 
@@ -88,15 +86,15 @@ class user {
         return[];
     }
 
-    private function update() :array
+    public function update() :array
     {
         //mantem a conexão com o banco
         $con = $this->connection();
         //stmt é para evitar sql injection 
         $stmt = $con->prepare("UPDATE user SET name = :_name, password = :_password WHERE ID = :_id");
         //\PDO::PARAM_STR para aceitar só string
-        $stmt->bindValue(":_name" $this->getName(), \PDO::PARAM_STR);
-        $stmt->bindValue(":_password" $this->getPassword(), \PDO::PARAM_STR);
+        $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
+        $stmt->bindValue(":_password", $this->getPassword(), \PDO::PARAM_STR);
         $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
         //se a alteração foi bem sucedida 
         if ($stmt->execute()){
@@ -105,7 +103,7 @@ class user {
         return[];
     }
 
-    private function delete() :array
+    public function delete() :array
     {
         $user = $this->read();
         //mantem a conexão com o banco
