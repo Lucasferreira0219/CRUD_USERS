@@ -1,6 +1,7 @@
 
 <?php
 
+
 //Puxa outros arquivos do projeto
 require_once "user.php";
 
