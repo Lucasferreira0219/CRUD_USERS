@@ -5,7 +5,8 @@
 require_once "user.php";
 
 //Codigo de resposta para quem requisiyou a api
-header('X-PHP-Response-Code: 404', true, 404)
+header('X-PHP-Response-Code: 404', true, 404);
+
 
 //recebe um arquivo json
 $json_convertido = json_decode(file_get_contents('php://input'), true);
